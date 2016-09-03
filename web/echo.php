@@ -1,7 +1,6 @@
 <?php
 
-function checkSignature()
-{
+
     $signature = $_GET["signature"];
     $timestamp = $_GET["timestamp"];
     $nonce = $_GET["nonce"];
@@ -18,6 +17,3 @@ function checkSignature()
 //        return false;
 //    }
     echo $_GET['echostr'];
-
-
-}
