@@ -2,8 +2,11 @@
 
 namespace app\models;
 
+use Faker\Factory;
 use Yii;
 use yii\base\Model;
+use yii\httpclient\Client;
+use yii\rest\CreateAction;
 
 /**
  * ContactForm is the model behind the contact form.
@@ -23,11 +26,79 @@ class Wechat extends Model {
         $this->appScret= Yii::$app->params['appscret'];
     }
 
-    public function getActoken(){
+    public function getActoken()
+    {
+        $redis = Yii::$app->redis;
+        if ($token = $redis->get('access_token')) {
+
+            return $token;
+
+        } else {
+
+            $client = new Client([
+                'transport' => 'yii\httpclient\CurlTransport' // only cURL supports the options we need
+            ]);
+            $response = $client->createRequest()
+                ->setData(['grant_type' => 'client_credential', 'appid' => $this->appid, 'secret' => $this->appScret])
+                ->addOptions([
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                ])->setUrl('https://api.weixin.qq.com/cgi-bin/token')
+                ->setMethod('GET')
+                ->send();
+//            print_r($response->data);
+            $redis->set('access_token', $response->data['access_token']);
+             $redis->expire('access_token', 7000);
+            return $response->data['access_token'];
 
 
+        }
+    }
+
+    public function getJsTicket()
+    {
+
+        $redis = Yii::$app->redis;
+        if ($js = $redis->get('jsapi_ticket')) {
+
+            return $js;
+
+        } else {
+//            print_r($this->getActoken());
+
+            $client = new Client([
+                'transport' => 'yii\httpclient\CurlTransport' // only cURL supports the options we need
+            ]);
+            $response = $client->createRequest()
+                ->setData(['access_token'=> $this->getActoken(),'type'=>'jsapi'])
+                ->addOptions([
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                ])->setUrl('https://api.weixin.qq.com/cgi-bin/ticket/getticket')
+                ->setMethod('GET')
+                ->send();
+//            print_r($response->data);
+//            exit;
+            $redis->set('jsapi_ticket', $response->data['ticket']);
+            $redis->expire('jsapi_ticket', 7000);
+            return $response->data['ticket'];
 
 
+        }
+    }
+
+    public function getJsArray($url){
+        $faker =  Factory::create();
+        $noncestr = $faker->word;
+        $timestamp = time();
+        $string = 'jsapi_ticket='+$this->getJsTicket()+'&noncestr='.$noncestr+'&timestamp='.$timestamp+'&url='.$url;
+        $tmpStr = sha1( $string );
+        $appid = $this->appid;
+        return array(
+
+            'appid' => $appid,
+            'timestamp' => $timestamp,
+            'nonceStr' => $noncestr,
+            'signature' => $tmpStr,
+    );
     }
 
 

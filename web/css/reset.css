@@ -1,0 +1,166 @@
+@charset "UTF-8";
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+address,
+img,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+img {
+    display: block;
+}
+body {
+    font: 14px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    
+    -webkit-touch-callout: none;
+    
+    -webkit-user-select: none;
+    
+    -webkit-text-size-adjust: 100%;
+    
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+}
+/*  ===typography=== */
+/*a {
+    text-decoration:none; 
+    outline: 0;
+}*/
+
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+    content: none;
+}
+ins {
+    text-decoration: none;
+}
+del {
+    text-decoration: line-through;
+}
+fieldset,
+img {
+    border: none;
+}
+/*  ===form=== */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: middle;
+    -webkit-user-select: auto;
+}
+textarea {
+    resize: none;
+    overflow: auto;
+    vertical-align: top;
+}
+[hidden] {
+    display: none;
+}
+/*  ===table=== */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+i{
+    font-style: normal;
+}
+input,
+textarea {
+    -webkit-appearance: none;
+    border-radius: 0;
+    outline:none;
+}
+
+select{
+    outline:none;
+}
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {
+    display: inline-block;
+}
+* html .clearfix {
+    height: 1%;
+}
+.clearfix {
+    display: block;
+}
+.clear {
+    clear: both;
+    height: 0;
+    font: 0/0 Arial;
+    visibility: hidden;
+    line-height: 0;
+}
+a {
+    text-decoration: none;
+    outline: 0;
+    _blr: expression(this.onFocus=this.blur())
+}
+a:hover {
+    text-decoration: none;
+}
+a:focus {
+  outline: thin dotted;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+
+.hide{
+    display: none;
+}

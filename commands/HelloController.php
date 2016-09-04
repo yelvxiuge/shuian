@@ -8,7 +8,7 @@
 namespace app\commands;
 
 use yii\console\Controller;
-
+use Faker\Factory;
 /**
  * This command echoes the first argument that you have entered.
  *
@@ -26,5 +26,12 @@ class HelloController extends Controller
     public function actionIndex($message = 'hello world')
     {
         echo $message . "\n";
+    }
+
+    public function actionTest(){
+
+        $faker = Factory::create();
+        echo $faker->word;
+
     }
 }
