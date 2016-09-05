@@ -42,9 +42,17 @@ class ShuiController extends Controller {
 
     public function actionShare(){
         $wechat = new Wechat;
-        return $this->render('share',[
-            'jsAr'=>$wechat->getJsArray("http://shuian.md5crack.cn/index.php?r=shui/share")
-        ]);
+
+        if($_GET['from']){
+            return $this->render('share', [
+                'jsAr' => $wechat->getJsArray("http://shuian.md5crack.cn/index.php?r=shui/share&singlemessage&isappinstalled=0")
+            ]);
+
+        }else {
+            return $this->render('share', [
+                'jsAr' => $wechat->getJsArray("http://shuian.md5crack.cn/index.php?r=shui/share")
+            ]);
+        }
 
 
     }
