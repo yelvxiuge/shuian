@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Model;
 use yii\httpclient\Client;
 use yii\rest\CreateAction;
+use yii\web\JsExpression;
 
 /**
  * ContactForm is the model behind the contact form.
@@ -88,8 +89,13 @@ class Wechat extends Model {
     public function getJsArray($url){
         $faker =  Factory::create();
         $noncestr = $faker->word;
+//        print("\n".$noncestr);
         $timestamp = time();
-        $string = 'jsapi_ticket='+$this->getJsTicket()+'&noncestr='.$noncestr+'&timestamp='.$timestamp+'&url='.$url;
+        $js = $this->getJsTicket();
+//        print("\n".$js);
+        $string ="jsapi_ticket=$js&noncestr=$noncestr&timestamp=$timestamp&url=$url";
+//        print "\n".$string;
+//        exit;
         $tmpStr = sha1( $string );
         $appid = $this->appid;
         return array(
