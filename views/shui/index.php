@@ -17,6 +17,11 @@ $this->context->layout=false;
     <link rel="stylesheet" href="css/reset.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/page.min.css">
+    <style type="text/css">
+        .index-btns>a{
+            height: 38px;
+        }
+    </style>
 </head>
 
 
@@ -31,7 +36,7 @@ $this->context->layout=false;
     <div class="index-btns">
         <img src="images/s_7.png" >
         <a href="javascript:;" id="sm"></a>
-        <a href="record.html"></a>
+        <a href="/index.php?r=shui/records"></a>
     </div>
 </article>
 
