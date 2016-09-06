@@ -31,7 +31,7 @@ class ShuiController extends Controller {
 //                'jsAr'=>$wechat->getJsArray("http://shuian.md5crack.cn/index.php?r=shui/index")
 //            ]);
         $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
-        return $this->render('share', [
+        return $this->render('index', [
             'jsAr' => $wechat->getJsArray($url)
         ]);
     }
