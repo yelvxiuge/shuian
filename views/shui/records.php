@@ -5,14 +5,14 @@
 
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>用声音温暖心的角落</title>
         <meta name="location" content="">
         <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
+        <meta name="keywords" content="小时候，父母陪我过中秋；现在，我陪父母过中秋......" />
+        <meta name="description" content="小时候，父母陪我过中秋；现在，我陪父母过中秋......" />
         <link rel="stylesheet" href="css/reset.min.css">
         <link rel="stylesheet" href="css/animate.min.css">
         <link rel="stylesheet" href="css/page.min.css">
@@ -29,7 +29,21 @@
                 timestamp: "<?= $jsAr['timestamp'] ?>",
                 nonceStr: "<?= $jsAr['nonceStr']?>",
                 signature: "<?= $jsAr['signature']?>",
-                jsApiList: ['translateVoice', 'startRecord', 'stopRecord', 'playVoice', 'stopVoice', 'uploadVoice', 'pauseVoice']
+                jsApiList: ['showMenuItems','translateVoice', 'startRecord', 'stopRecord', 'playVoice', 'stopVoice', 'uploadVoice', 'pauseVoice']
+            });
+
+             wx.ready(function() {
+                wx.showMenuItems({
+                    menuList: [
+                        "menuItem:share:appMessage",
+                        "menuItem:share:timeline",
+                        "menuItem:share:qq",
+                        "menuItem:share:QZone",
+                        "menuItem:share:weiboApp",
+                        "menuItem:share:facebook",
+                        "menuItem:share:QZone"
+                    ]
+                });
             });
         </script>
         <style type="text/css">
@@ -47,6 +61,7 @@
     </head>
 
     <body style="background: url(images/r_6.png) repeat-y 0 0;" v-cloak>
+        <img src="images/lpic.png" style="position:fixed; left:-999px; top:-999px;" />
         <article class="page-wrap" id="pageContent">
             <img src="images/r_1.png">
             <img src="images/r_2.png">
@@ -75,6 +90,62 @@
         <script type="text/javascript" src="js/zepto.js"></script>
         <script type="text/javascript" src="js/weui/js/jquery-weui-0.8.min.js"></script>
         <script type="text/javascript" src="js/vue.min.js"></script>
+
+
+
+        <script type="text/javascript">
+            $(function() {
+
+                var sata = {
+                    //            title : 'asddasssdsdsdsdsdsd',
+                    //            link : 'http://www.baidu.com',
+                    //            imgUrl : 'http://shuian.md5crack.cn/images/i_1.png'
+                    title: '用声音温暖心的角落 ',
+                    link: 'http://shuian.md5crack.cn/index.php?r=shui',
+                    imgUrl: 'http://shuian.md5crack.cn/images/lpic.png',
+                    desc: '小时候，父母陪我过中秋；现在，我陪父母过中秋......'
+                };
+
+                wx.ready(function() {
+
+
+                    //分享到朋友圈
+                    wx.onMenuShareTimeline({
+                        title: sata.title, // 分享标题
+                        link: sata.link, // 分享链接
+                        imgUrl: sata.imgUrl, // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+
+                    //分享给朋友
+                    wx.onMenuShareAppMessage({
+                        title: sata.title, // 分享标题
+                        desc: sata.desc, // 分享描述
+                        link: sata.link, // 分享链接
+                        imgUrl: sata.imgUrl, // 分享图标
+                        //type: '', // 分享类型,music、video或link，不填默认为link
+                        //dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+
+
+                });
+
+            });
+        </script>
+        
 
         <script type="text/javascript">
             $(function() {
