@@ -27,9 +27,13 @@ class ShuiController extends Controller {
 //                ->send();
 //            echo '<pre>';
 //            print_r($response->data);
-            return $this->render('index',[
-                'jsAr'=>$wechat->getJsArray("http://shuian.md5crack.cn/index.php?r=shui/index")
-            ]);
+//            return $this->render('index',[
+//                'jsAr'=>$wechat->getJsArray("http://shuian.md5crack.cn/index.php?r=shui/index")
+//            ]);
+        $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+        return $this->render('share', [
+            'jsAr' => $wechat->getJsArray($url)
+        ]);
     }
 
     public function actionRecords(){
